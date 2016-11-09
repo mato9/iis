@@ -8,11 +8,13 @@ $link = '';
     if(isset($_POST['regist']))
     {
         $pDatabase = config_db::getInstance();
-
+        //$createTable = new create();
+        
+        //$link = $connectdb->connect();
         //$register->DB($link)
         if($register->registerUser($pDatabase))
-        {   //stranka po uspesnej registracii
-            $function->sendToUrl("http://www.google.sk");
+        {
+            $function->sendToUrl("success.html");
         }
         else $function->sendToUrl("uz registrovany uzivatel.html");
     }
@@ -88,6 +90,8 @@ $link = '';
     var pass;
     function user_checkvalues() {
         var ret = true;
+        console.log(pass);
+        console.log("ssss");
         
         document.getElementById("passw_conf").innerHTML = "*";
         
@@ -161,7 +165,6 @@ $link = '';
 
         return ret;
     }
-
     $('input[type="radio"]').click(function(){
             if($(this).attr("value")=="customer")
             {
@@ -175,9 +178,57 @@ $link = '';
 
     var pwdwidget = new PasswordWidget('thepwddiv','password');
     pass = pwdwidget.MakePWDWidget();
-    $('input[type="radio"]').trigger('click'); //zaklikne samo
+    //$('input[type="radio"]').trigger('click'); //zaklikne samo
 
 </script>
+
+<!--<script type="text/javascript">
+    $(document).ready(function() {
+            //var typeText = document.getElementById('password').value;
+            //console.log(typeText);
+            //var typeTextt = document.getElementById('confirmpassword').value;
+            //console.log(typeTextt);
+            //if(typeText == "")
+                document.getElementById('phone').value = "0000-0000";
+            console.log(document.getElementById('phone').value);
+            document.getElementById('contract_from_date').value = "4444";
+            //date();
+        });
+
+    /*function date(){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        console.log(today);
+        if(dd<10) {
+            dd='0'+dd
+        } 
+
+        if(mm<10) {
+            mm='0'+mm
+        } 
+
+        alert( today = mm+'/'+dd+'/'+yyyy);
+    }*/
+   /* $(document).ready(function() {
+        if(document.getElementById('employee').checked == true)
+        {
+            show();
+        }
+        }
+
+        function hide () {
+            document.getElementById('employ').style.display = 'none';
+        }
+
+        function show () {
+            document.getElementById('employ').style.display = 'inline';
+        }
+    }*/
+
+
+ </script>  -->
 </body>
 </html>
         
