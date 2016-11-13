@@ -1,172 +1,180 @@
 <?PHP
-$dir = getcwd();
-//echo $dir." ss ";
-//require_once("../db/create_table.php");
-//require_once("/funkcie.php");
-//require_once("../funkcie.php");
-
-//include 'singleton.php';
-
-
-$register = new member();
-class member
-{
-    //$pDatabase = config_db::getInstance();  
-    var $tablename = "";
-    var $link = "";
-    //var $cre_tabl = "";
     
-    function registerUser($link)
-    {   
-        
-        //$this->cre_tabl = $cre_tabl;
-        $this->link = $link;
-        if(!isset($_POST['regist']))
-        {
-           return false;
-        }
-        $form = array();
-        //echo "dsds ".$_POST['user'];
-        $this->tablename = $_POST['user'];
-        if(!$this->collectvars($form))
-        {
-            //var_dump($form);
-            return false;
-        }
-        //$this->conPass();
+    // Class instance
+    $register = new Member();
 
-        if(!$this->sendDB($form))
-        {
-            return false;
-        }
-        return true;
+    /**
+     * TODO: add description
+     */
+    class Member {
 
-    }
+        // Class fields
+        var $tablename = "";
 
-    function setTable($tablename)  //nastavi pozadovanu tabulku
-    {
-        global $createTable;
-        $this->tablename = $tablename;
-        //echo "t ".$this->tablename;
-        //echo " s ".$tablename." d";
-        $sql = "SHOW COLUMNS FROM ".$this->tablename;
-        $result =  $this->link->query($sql);
+        /** WARNING!!! Use this PHPDoc comment
+         * in order to provide typehint
+         * otherwise you'll get the error
+         * "method 'db_query' not found in string" */
+        /** @var Connection_db */
+        var $link = "";
 
-        if(!$result || mysql_num_rows($result) <= 0)
-        {
-            $result = $createTable->create_table_employee();
-            return $this->link->query($result);
-        }
-        return true;
-    }
-    function sendDB($vars)  //$vars = pole premennych z formulara
-    {
-        
-        /*if(!$connectdb->connect())
-        {
-            echo "chyba<br\>";
-            return false;
-        } */
-        $this->setTable($this->tablename);
-        //print_r($vars);
-        if(!$this->checkunique($vars,'email'))
-        {
-            //chyba
-            //echo "email";
-            return false;
-        }
-        if(!$this->checkunique($vars,'login'))
-        {
-            //chyba
-            //echo "login";
-            return false;
-        }
-        //echo " dddd ";
-        //echo date('l \t\h\e jS');
-        if(!$this->insertToDB($vars))
-        {
-            //echo "inser";
-            return false;
-        }
-        return true;
-    }
+        /**
+         * Registering new user
+         * @param $link - db connection
+         * @return bool - registering result
+         */
+        function registerUser($link) {
 
-    function insertToDB($vars)
-    {
-        global $fill;
-        $result = $fill->insert_employee($vars);
-      
-        if(!$this->link->query($result)){
-            return false;
-        }
-        return true;
-    }
+            // Getting db connection
+            $this->link = $link;
 
-    function checkunique($field, $var)
-    {
-        $filedvar = $this->sanitizeSql($field[$var]);
-        //echo "where ".$var." FROM  ".$this->tablename." fieldva[] ".$field[$var]."<br/>";
-        $sql = "SELECT login FROM ".$this->tablename." where ".$var."='".$field[$var]."'";
-        //echo $sql;
-        $sql = $this->link->query($sql);       
-        if($sql && (mysql_num_rows($sql) > 0))
-        {
-            return false;
+            if (!isset($_POST['regist'])) {
+               return false;
+            }
+
+            // Collection of input data
+            $form = array();
+            $this->tablename = $_POST['user'];
+    
+            if (!$this->collectVars($form)) {
+                return false;
+            }
+    
+            if (!$this->sendDB($form)) {
+                return false;
+            }
+            return true;
+    
         }
-        else 
-        {
+
+        /**
+         * Nastavi pozadovanu tabulku
+         * @param $tablename
+         * @return bool
+         */
+        function setTable($tablename) {
+
+            global $createTable;
+            $this->tablename = $tablename;
+            $sql = "SHOW COLUMNS FROM ".$this->tablename;
+            $result = $this->link->db_query($sql);
+    
+            if (!$result || (!is_bool($result) && mysqli_num_rows($result) == 0)) {
+                $result = $createTable->create_table_employee();
+                return $this->link->db_query($result);
+            }
             return true;
         }
-    }
 
-    function sanitizeSql($var)
-    {//echo "sani ".$var;
-    //global $link;
-        if(function_exists("mysqli_real_escape_string"))
-            $str = $this->link->escape($var);
-        else
-            $str = addslashes($var);
-        return $str;
-    }
+        /**
+         * @param $vars - pole premennych z formulara
+         * @return bool
+         */
+        function sendDB($vars)   {
+    
+            $this->setTable($this->tablename);
+            if (!$this->checkUnique($vars,'email')) {
+                return false;
+            }
 
-    function collectvars(&$formvars)
-    {
-        //$formvars['id']=
-        $formvars['login']= $this->sanitize($_POST['login']);
-        $formvars['password']= $this->sanitize($_POST['password']);
-        $formvars['firstname']= $this->sanitize($_POST['firstname']);
-        $formvars['lastname']= $this->sanitize($_POST['lastname']);
-        $formvars['birthdate']= $this->sanitize($_POST['birthdate']);
-        $formvars['email']= $this->sanitize($_POST['email']);
-        $formvars['contract_from_date'] = $this->sanitize($_POST['contract_from_date']);
-        $formvars['contract_to_date'] = $this->sanitize($_POST['contract_to_date']);
-        $formvars['address']= $this->sanitize($_POST['address']);
-        $formvars['phone']= $this->sanitize($_POST['phone']);
-        return true;
-    }
-
-    function sanitize($vars)
-    {
-        if(get_magic_quotes_gpc())
-        {
-            $vars = stripslashes($vars);
-            //echo "<br /> aa".$vars."<br />";
+            if(!$this->checkUnique($vars,'login')) {
+                return false;
+            }
+    
+            if(!$this->insertToDB($vars)) {
+                return false;
+            }
+            return true;
         }
 
-        $injreg = array('/(\n+)/i',
-                '/(\r+)/i',
-                '/(\t+)/i',
-                '/(%0A+)/i',
-                '/(%0D+)/i',
-                '/(%08+)/i',
-                '/(%09+)/i'
-                );
-        $vars = preg_replace($injreg, '', $vars);
-        return $vars;
+        /**
+         * @param $vars
+         * @return bool
+         */
+        function insertToDB($vars) {
+            global $fill;
+            $result = $fill->insert_employee($vars);
+          
+            if (!$this->link->db_query($result)) {
+                return false;
+            }
+            return true;
+        }
+
+        /**
+         * @param $field
+         * @param $var
+         * @return bool
+         */
+        function checkUnique($field, $var) {
+
+            $filedvar = $this->sanitizeSql($field[$var]);
+    
+            $sql = "SELECT login FROM ".$this->tablename." where ".$var."='".$field[$var]."'"; //$field[$var] prepisat na $filedvar; pokial funguje mysqli_real_escape...
+    
+            $result = $this->link->db_query($sql);
+
+            if (!is_bool($result) && mysqli_num_rows($result) > 0) {
+                return false;
+            } else if ($result) {
+                return true;
+            }
+
+        }
+
+        /**
+         * @param $var
+         * @return string
+         */
+        function sanitizeSql($var)
+        {
+            if(function_exists("mysqli_real_escape_string"))
+                $str = $this->link->escape($var); //!!
+            else
+                $str = addslashes($var);
+            return $str;
+        }
+
+        /**
+         * @param $formvars
+         * @return bool
+         */
+        function collectVars(&$formvars)
+        {
+            //$formvars['id']=
+            $formvars['login']= $this->sanitize($_POST['login']);
+            $formvars['password']= $this->sanitize($_POST['password']);
+            $formvars['firstname']= $this->sanitize($_POST['firstname']);
+            $formvars['lastname']= $this->sanitize($_POST['lastname']);
+            $formvars['birthdate']= $this->sanitize($_POST['birthdate']);
+            $formvars['email']= $this->sanitize($_POST['email']);
+            $formvars['contract_from_date'] = $this->sanitize($_POST['contract_from_date']);
+            $formvars['contract_to_date'] = $this->sanitize($_POST['contract_to_date']);
+            $formvars['address']= $this->sanitize($_POST['address']);
+            $formvars['phone']= $this->sanitize($_POST['phone']);
+            return true;
+        }
+
+        /**
+         * @param $vars
+         * @return mixed|string
+         */
+        function sanitize($vars)
+        {
+            if(get_magic_quotes_gpc()) {
+                $vars = stripslashes($vars);
+            }
+    
+            $injreg = array('/(\n+)/i',
+                    '/(\r+)/i',
+                    '/(\t+)/i',
+                    '/(%0A+)/i',
+                    '/(%0D+)/i',
+                    '/(%08+)/i',
+                    '/(%09+)/i'
+                    );
+            $vars = preg_replace($injreg, '', $vars);
+            return $vars;
+        }
     }
-
-
-
-}
-
 ?>

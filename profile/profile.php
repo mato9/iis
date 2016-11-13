@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Sultan
- * Date: 2/11/2016
- * Time: 22:39 PM
- */
-
 include('../session/session.php');
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>

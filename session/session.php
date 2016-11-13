@@ -1,27 +1,23 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Sultan
- * Date: 2/11/2016
- * Time: 22:16 PM
- */
 
-include('../db/config.php');
+    require_once("../util_functions.php");
+    session_start();
+    $link = $util_functions->getLink();
+    $user_check = $_SESSION['login_user'];
 
-session_start();
+    // Escaping SQL query
+    $sql = "SELECT login from employee WHERE login = '$user_check'";
 
-$user_check = $_SESSION['login_user'];
+    // Trying to perform a query
+    $session_sql = $link->db_query($sql);
+    // Fetching results
+    $row = mysqli_fetch_array($session_sql, MYSQLI_ASSOC);
 
-$_sql = "SELECT login from employee WHERE login = '$user_check'";
+    if (isset($_SESSION['login'])) {
+            $login_session = $row['login'];
+    }
 
-$session_sql = mysql_query($_sql, $link);
-$row = mysql_fetch_array($session_sql, MYSQLI_ASSOC);
-
-if (isset($_SESSION['login'])) {
-        $login_session = $row['login'];
-}
-
-if(!isset($_SESSION['login_user'])){
-    header("location: ../index.php");
-}
+    if(!isset($_SESSION['login_user'])){
+        $util_functions->sendToUrl('../index.php');
+    }
 ?>

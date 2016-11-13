@@ -1,13 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Sultan
- * Date: 2/11/2016
- * Time: 22:29 PM
- */
+    require_once("../util_functions.php");
+    session_start();
 
-session_start();
-if(session_destroy()) {
-    header("location: ../index.php");
-}
+    // User has logged out,
+    if(session_destroy()) {
+        // redirecting..
+        $util_functions->sendToUrl('../index.php');
+    }
 ?>
