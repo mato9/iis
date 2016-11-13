@@ -6,6 +6,7 @@ $createTable = new CreateTable();
 require_once("connectionDatabase.php");
 $link = Connection_db::getInstance();
 
+//$createTable->create_table_employee();
 //$createTable->create_table_address();
 //$createTable->create_table_room();
 //$createTable->create_table_menu();
