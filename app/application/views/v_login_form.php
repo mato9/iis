@@ -1,7 +1,7 @@
 <html>
 <?php
 if (isset($this->session->userdata['logged_in'])) {
-    header("location: http://localhost/app/login/user_login_process");
+    header("location: http://restaurant-system.9e.cz/app/login/user_login_process");
 }
 ?>
 <head>
@@ -28,7 +28,7 @@ if (isset($message_display)) {
     <div id="login">
         <h2>Login Form</h2>
         <hr/>
-        <?php echo form_open('http://localhost/app/login/user_login_process'); ?>
+        <?php echo form_open('http://restaurant-system.9e.cz/app/login/user_login_process'); ?>
         <?php
         echo "<div class='error_msg'>";
         if (isset($error_message)) {
@@ -42,7 +42,7 @@ if (isset($message_display)) {
         <label>Password :</label>
         <input type="password" name="password" id="password" placeholder="**********"/><br/><br />
         <input type="submit" value=" Login " name="submit"/><br />
-        <a href="http://localhost/app/login/user_registration_show">To SignUp Click Here</a>
+        <a href="http://restaurant-system.9e.cz/app/login/user_registration_show">To SignUp Click Here</a>
         <?php echo form_close(); ?>
     </div>
 </div>

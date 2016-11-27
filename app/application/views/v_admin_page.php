@@ -4,7 +4,7 @@ if (isset($this->session->userdata['logged_in'])) {
     $login = ($this->session->userdata['logged_in']['login']);
     $email = ($this->session->userdata['logged_in']['email']);
 } else {
-    header("location: http://localhost/app/login/");
+    header("location: http://restaurant-system.9e.cz/app/login/");
 }
 ?>
 <head>
@@ -26,7 +26,9 @@ if (isset($this->session->userdata['logged_in'])) {
     echo "Your Email is " . $email;
     echo "<br/>";
     ?>
-    <b id="logout"><a href="http://localhost/app/login/logout">Logout</a></b>
+
+    <b id="logout"><a href="http://restaurant-system.9e.cz/app/reserve">Reserve a room/table</a></b>
+    <b id="logout"><a href="http://restaurant-system.9e.cz/app/login/logout">Logout</a></b>
 </div>
 <br/>
 </body>

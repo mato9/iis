@@ -1,7 +1,7 @@
 <html>
 <?php
 if (isset($this->session->userdata['logged_in'])) {
-    header("location: http://localhost/app/login/user_login_process");
+    header("location: http://restaurant-system.9e.cz/app/login/user_login_process");
 }
 ?>
 <head>
@@ -18,7 +18,7 @@ if (isset($this->session->userdata['logged_in'])) {
         echo "<div class='error_msg'>";
         echo validation_errors();
         echo "</div>";
-        echo form_open('http://localhost/app/login/new_user_registration');
+        echo form_open('http://restaurant-system.9e.cz/app/login/new_user_registration');
 
         echo form_label('Create Login : ');
         echo"<br/>";
@@ -86,7 +86,7 @@ if (isset($this->session->userdata['logged_in'])) {
             echo "<label class='label_output'>Entered Date: </label>".$Birthday;
         }
         ?>
-        <a href="http://localhost/app/login/index">For Login Click Here</a>
+        <a href="http://restaurant-system.9e.cz/app/login/index">For Login Click Here</a>
     </div>
 </div>
 </body>
