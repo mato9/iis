@@ -9,10 +9,18 @@ if (isset($this->session->userdata['logged_in'])) {
 ?>
 <head>
     <title>Admin Page</title>
-    <link rel="stylesheet" type="text/css" href="../../../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Open+Sans+Condensed:300|Raleway' rel='stylesheet' type='text/css'>
 </head>
 <body>
+<?php
+        echo "<div class='error_msg'>";
+        if (isset($error_message)) {
+            echo $error_message;
+        }
+        echo validation_errors();
+        echo "</div>";
+?>
 <div id="profile">
     <?php
     echo "Hello <b id='welcome'><i>" . $login . "</i> !</b>";
@@ -28,6 +36,8 @@ if (isset($this->session->userdata['logged_in'])) {
     ?>
 
     <b id="logout"><a href="http://restaurant-system.9e.cz/app/reserve">Reserve a room/table</a></b>
+    <b><a href="http://restaurant-system.9e.cz/app/update">Update employee</a></b>
+    <b><a href="http://restaurant-system.9e.cz/app/menu">Menu</a></b>
     <b id="logout"><a href="http://restaurant-system.9e.cz/app/login/logout">Logout</a></b>
 </div>
 <br/>
