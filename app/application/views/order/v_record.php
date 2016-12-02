@@ -4,30 +4,25 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../../css/style.css" rel="stylesheet">
+        <link href="../../css/record.css" rel="stylesheet">
     </head>
     <body>
         <div id="main">
             <div id="find">
                 <h1>Find order</h1>
-                <div id="all">
-                    <ol>
-                        <?php foreach ($tables as $table): ?>
-                        <li><a href="<?php echo "http://restaurant-system.9e.cz/app/order/show_order/" . $table->id_table ."/". $table->id_employee ."/". $table->id_menu; ?>">
-                        <div id='table'>
-                            <?php 
-                            echo "Number table:  ";
-                            echo $table->id_table; 
-                            ?>
-                        </div>
-                        </a></li>
-                        <?php endforeach; ?>
-                    </ol>
-                </div>
+                <form method="post" action="<?php echo "http://localhost/sas/app/record/show_order"?>">
+                    <label>Date from: </label>
+                    <input type="date" name="d_from">
+                    <br/>
+                    <label>Date To: </label>
+                    <br/>
+                    <input type="submit" id="submit" name="Show" value="Show">
+                </form>
             </div>
             <div id='show'>
                 <?php 
-                    foreach($single_table as $order):
+                if($d_from != NULL){ 
+                    foreach($d_from as $order):
                         echo "<div id = 'order'>";
                         echo "ID: ";
                         echo $order->id_order;
@@ -38,21 +33,27 @@
                         echo "Count ks: ";
                         echo $order->id_count_ks;
                         echo "<br/>";
+                        echo "Date pay: ";
+                        echo $order->date_pay;
+                        echo "<br/>";
                         echo "Employee: ";
                         echo $login;
                         echo "<br/>";
-                        echo "Menu: ";
-                        echo $menu;
+                        echo "Pay method: ";
+                        echo $order->pay_method;
                         echo "<br/>";
-                        echo "Price: ";
-                        echo $order->price;
+                        echo "Summary price: ";
+                        echo $order->sum_price;
                         echo "kc<br/>";
                         echo "</div>";
                     endforeach;
-                
+                }
+                if($d_from == NULL) {
+                    echo "Incorrect date";
+                }
                 ?>
                 <br/>
-                <b id = "back"><a href="http://restaurant-system.9e.cz/app/login">Back</a></b>
+                <b id = "back"><a href="http://localhost/sas/app/login">Back</a></b>
             </div>
         </div>
     </body>
