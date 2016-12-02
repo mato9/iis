@@ -10,7 +10,7 @@
         <div id="main">
             <div id="find">
                 <h1>Find order</h1>
-                <form method="post" action="<?php echo "http://localhost/sas/app/record/show_order"?>">
+                <form method="post" action="<?php echo "http://restaurant-system.9e.cz/app/record/show_order"?>">
                     <label>Date from: </label>
                     <input type="date" name="d_from">
                     <br/>
@@ -53,7 +53,7 @@
                 }
                 ?>
                 <br/>
-                <b id = "back"><a href="http://localhost/sas/app/login">Back</a></b>
+                <b id = "back"><a href="http://restaurant-system.9e.cz/app/login">Back</a></b>
             </div>
         </div>
     </body>
