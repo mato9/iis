@@ -38,6 +38,8 @@ if (isset($this->session->userdata['logged_in'])) {
     <b id="logout"><a href="http://restaurant-system.9e.cz/app/reserve">Reserve a room/table</a></b>
     <b><a href="http://restaurant-system.9e.cz/app/update">Update employee</a></b>
     <b><a href="http://restaurant-system.9e.cz/app/menu">Menu</a></b>
+    <b><a href="http://restaurant-system.9e.cz/app/record">Record</a></b>
+    <b><a href="http://restaurant-system.9e.cz/app/order">Order</a></b>
     <b id="logout"><a href="http://restaurant-system.9e.cz/app/login/logout">Logout</a></b>
 </div>
 <br/>
