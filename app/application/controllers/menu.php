@@ -2,7 +2,7 @@
     class Menu extends CI_Controller {
 
             /**
-             * Inser constructor.
+             * Constructor.
              */
             public function __construct() {
                 parent::__construct();
@@ -14,7 +14,6 @@
              *  Default method while requesting this controller
              */
             public function index() {
-                //$this->load->view("menu/v_menu");
                 $this->show_food();
             }
 
@@ -36,8 +35,7 @@
                 $data = array(
                     'id_food' => 'NULL', // AUTO-INCREMENT
                     'name' => $this->input->post('name'),
-                    'price' => $this->input->post('price'),                    
-                    //'weight' => $this->input->post('food_weigh'),
+                    'price' => $this->input->post('price'),
                     'quantity' => $this->input->post('quantity'),
                     'ingredience' => $this->input->post('ingredience')
                 );
@@ -52,7 +50,6 @@
                     echo "<script type='text/javascript'>
                         alert('Error, food already exist!');
                         </script>";
-                    //$this->load->view('menu/v_menu', $data);
                     $this->show_food();
                 }
             }
@@ -64,7 +61,6 @@
                     $data = array(
                         'name' => $this->input->post('food_name'),
                         'price' => $this->input->post('food_price'),
-                        //'weight' => $this->input->post('food_weigh'),
                         'quantity' => $this->input->post('food_quantity'),
                         'ingredience' => $this->input->post('food_ingredience')
                     );

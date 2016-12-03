@@ -1,7 +1,6 @@
 <?php
 	class M_Menu extends CI_Model {
 
-    
         public function display_food() {
             $this->db->select('*');
             $this->db->from('menu');
@@ -18,8 +17,6 @@
             $query = $this->db->get();
             return $query->result();
         }
-
-
 
         public function insert_food($data) {
 

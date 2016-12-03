@@ -1,48 +1,59 @@
 <?php
-	class M_order extends CI_Model {
+class M_Order extends CI_Model {
+    /**
+     * Display all rooms
+     * @return mixed
+     */
+    public function display_menus() {
+        $this->db->select('*');
+        $this->db->from('menu');
 
-    
-        public function display_order() {
-            $this->db->select('*');
-            $this->db->from('menu_orders');
+        $query = $this->db->get();
+        return $query->result();
+    }
 
-            $query = $this->db->get();
+    /**
+     * Get food price by its id
+     */
+    public function get_price_by_id($food_id) {
+        $condition = "id_food =" . "'" . $food_id . "'";
+        $this->db->select('price');
+        $this->db->from('menu');
+        $this->db->where($condition);
+        $this->db->limit(1);
+        $query = $this->db->get();
 
-            return $query->result();
+        return $query->result();
+    }
+
+    /**
+     * Inserting a new order
+     * @param $data
+     * @return bool - query success
+     */
+    public function insert_order($data) {
+
+        $this->db->insert('menu_orders', $data);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
         }
+    }
 
-        public function display_order_id($data) {
-            $condition = "id_table = " . "'" . $data. "'";
-            $this->db->select('*');
-            $this->db->from('menu_orders');
-            $this->db->where($condition);
+    /**
+     * @param $data
+     * @return bool
+     */
+    public function insert_quantity($data) {
 
-            $query = $this->db->get();
-
-            return $query->result();
+        $this->db->insert('quantity', $data);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
         }
-
-        public function get_employee($id) {
-            //echo $id."  ";
-            $condition = "id =" . "'" . $id . "'";
-            $this->db->select('login');
-            $this->db->from('employee');
-            $this->db->where($condition);
-            $this->db->limit(1);
-            $query = $this->db->get();
-            $login = $query->result();
-            foreach($login as $loginn){ foreach($loginn as $log)  return $log;}
-        }
-
-        public function get_menu($id) {
-            $condition = "id_food =" . "'" . $id . "'";
-            $this->db->select('name');
-            $this->db->from('menu');
-            $this->db->where($condition);
-            $this->db->limit(1);
-            $query = $this->db->get();
-            $login = $query->result();
-            foreach($login as $loginn){ foreach($loginn as $log)  return $log;}
-        }
+    }
 
 }
+?>

@@ -6,7 +6,6 @@
         }
 
         public function index() {
-           // $this->load->view("v_update");
             $this->show_employee_id();
         }
 
@@ -14,9 +13,6 @@
             $id = $this->uri->segment(3);
             $data['employee'] = $this->m_update->show_employee();
             $data['single_login'] = $this->m_update->show_employee_id($id);
-            /*if($data){
-                var_dump($data);
-            }*/
             $this->load->view('v_update', $data);
         }
         function update_employee_id1() {
@@ -36,7 +32,6 @@
                 if($result)
                 {
                     $data['message_display'] = 'Update Successfully !';
-                    //$this->load->view('v_login_form', $data);
                 }
                 else {
                     $data['message_display'] = 'Update error!';
@@ -51,7 +46,6 @@
                     echo "<script type='text/javascript'>
                     alert('Delete employee successfully');
                     </script>";
-                    //$this->load->view('v_login_form', $data);
                 }
                 else {
                     $data['message_display'] = 'Delete error!';

@@ -1,59 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../../css/style.css" rel="stylesheet">
-    </head>
-    <body>
-        <div id="main">
-            <div id="find">
-                <h1>Find order</h1>
-                <div id="all">
-                    <ol>
-                        <?php foreach ($tables as $table): ?>
-                        <li><a href="<?php echo "http://restaurant-system.9e.cz/app/order/show_order/" . $table->id_table ."/". $table->id_employee ."/". $table->id_menu; ?>">
-                        <div id='table'>
-                            <?php 
-                            echo "Number table:  ";
-                            echo $table->id_table; 
-                            ?>
-                        </div>
-                        </a></li>
-                        <?php endforeach; ?>
-                    </ol>
-                </div>
-            </div>
-            <div id='show'>
-                <?php 
-                    foreach($single_table as $order):
-                        echo "<div id = 'order'>";
-                        echo "ID: ";
-                        echo $order->id_order;
-                        echo "<br/>";
-                        echo "Table: ";
-                        echo $order->id_table;
-                        echo "<br/>";
-                        echo "Count ks: ";
-                        echo $order->id_count_ks;
-                        echo "<br/>";
-                        echo "Employee: ";
-                        echo $login;
-                        echo "<br/>";
-                        echo "Menu: ";
-                        echo $menu;
-                        echo "<br/>";
-                        echo "Price: ";
-                        echo $order->price;
-                        echo "kc<br/>";
-                        echo "</div>";
-                    endforeach;
-                
-                ?>
-                <br/>
-                <b id = "back"><a href="http://restaurant-system.9e.cz/app/login">Back</a></b>
-            </div>
+<html>
+<head>
+    <title>Order a menu</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Open+Sans+Condensed:300|Raleway' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type = 'text/javascript' src = "<?php echo base_url();
+    ?>js/addSelect.js"></script>
+
+</head>
+<body>
+<div class="main">
+    <div id="content">
+        <h1>Order a menu</h1><br/>
+        <div id="message"></div>
+        <hr>
+
+        <?php echo form_open('http://localhost/app/order/try_order'); ?>
+
+        <label>Table</label>:
+        <select name="selectedTables">
+            <?php foreach($tables as $row) {
+                echo '<option value="'.$row->id_table.'">'.$row->id_table.'</option>'; } ?>
+        </select>
+
+        <div id="divcls">
+            <label>New menu item</label>:
+            <select id="ss" name="selectedMenus">
+                <?php foreach($menus as $row) {
+                    echo '<option id="'.$row->id_food.'" value="'.$row->name."/".$row->id_food.'">'.$row->name.'</option>'; } ?>
+            </select>
         </div>
-    </body>
+
+
+        <?php
+        $opts = 'placeholder="Počet kusů"';
+        echo form_input('quantity', '', $opts); ?>
+
+        <br>
+        <br>
+
+        <br>
+        <br>
+
+        <?php echo form_submit(array('id' => 'order', 'value' => 'Order')); ?>
+        <?php echo form_close(); ?>
+
+        <b><a href="http://localhost/app/login/user_login_process">Back to admin page</a></b>
+    </div>
+</div>
+</body>
 </html>

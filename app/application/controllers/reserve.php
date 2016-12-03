@@ -26,16 +26,12 @@
                 $data = array();
 
                 $query = $this->m_reserve->display_rooms();
-                if ($query)
-                {
+                if ($query) {
                     $data['rooms'] = $query;
-
                 }
-                $query1 = $this->m_reserve->display_tables();
-                if ($query1)
-                {
-                    $data['tables'] = $query1;
-
+                $another_query = $this->m_reserve->display_tables();
+                if ($another_query) {
+                    $data['tables'] = $another_query;
                 }
                 $this->load->view("reserve/v_reserve", $data);
             }
@@ -45,10 +41,7 @@
              */
             public function try_reserve() {
 
-                // TODO: multiple value
-
                 $session_info = $this->session->userdata('logged_in');
-
                 $result = $this->m_reserve->get_employee($session_info['login']);
 
                 $data = array(

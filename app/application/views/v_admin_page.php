@@ -4,7 +4,7 @@ if (isset($this->session->userdata['logged_in'])) {
     $login = ($this->session->userdata['logged_in']['login']);
     $email = ($this->session->userdata['logged_in']['email']);
 } else {
-    header("location: http://restaurant-system.9e.cz/app/login/");
+    header("location: http://localhost/app/login/");
 }
 ?>
 <head>
@@ -35,12 +35,13 @@ if (isset($this->session->userdata['logged_in'])) {
     echo "<br/>";
     ?>
 
-    <b id="logout"><a href="http://restaurant-system.9e.cz/app/reserve">Reserve a room/table</a></b>
-    <b><a href="http://restaurant-system.9e.cz/app/update">Update employee</a></b>
-    <b><a href="http://restaurant-system.9e.cz/app/menu">Menu</a></b>
-    <b><a href="http://restaurant-system.9e.cz/app/record">Record</a></b>
-    <b><a href="http://restaurant-system.9e.cz/app/order">Order</a></b>
-    <b id="logout"><a href="http://restaurant-system.9e.cz/app/login/logout">Logout</a></b>
+    <b><a href="http://localhost/app/reserve">Reserve a room/table</a></b><br>
+    <b><a href="http://localhost/app/update">Update employee</a></b><br>
+    <b><a href="http://localhost/app/menu">Menu</a></b><br>
+    <b><a href="http://localhost/app/record">Record</a></b><br>
+    <b><a href="http://localhost/app/orders_overview">Orders overview</a></b><br>
+    <b><a href="http://localhost/app/order">Menu order</a></b>
+    <b id="logout"><a href="http://localhost/app/login/logout">Logout</a></b>
 </div>
 <br/>
 </body>

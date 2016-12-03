@@ -44,29 +44,44 @@ CREATE TABLE IF NOT EXISTS din_table (
 );
 
 CREATE TABLE IF NOT EXISTS quantity (
-                id_quantity INT AUTO_INCREMENT PRIMARY KEY,
+                id_quantity INT NOT NULL PRIMARY KEY,
                 id_food INT,
                 count_ks INT,
                 FOREIGN KEY fk_food (id_food) REFERENCES menu (id_food)
 );
 
 CREATE TABLE IF NOT EXISTS tables_available (
-				        avail_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  				      table_num varchar(50) NOT NULL,
+				avail_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  				table_num varchar(50) NOT NULL,
                 avail int(1) NOT NULL,
                 FOREIGN KEY fk_table(avail_id) REFERENCES din_table (id_table)
 );
 
-CREATE TABLE IF NOT EXISTS tab_order (
+CREATE TABLE IF NOT EXISTS menu_orders (
                 id_order INT AUTO_INCREMENT PRIMARY KEY,
+                id_table INT,
+                id_count_ks INT,
+                id_employee INT,
+                price INT(11),
+                is_closed TINYINT(1) NOT NULL,
+                FOREIGN KEY fk_table(id_table) REFERENCES din_table (id_table),
+                FOREIGN KEY fk_quantity (id_count_ks) REFERENCES quantity (id_quantity),
+                FOREIGN KEY fk_employee (id_employee) REFERENCES employee (id)
+);
+
+CREATE TABLE IF NOT EXISTS order_record (
+                id_order INT AUTO_INCREMENT PRIMARY KEY,
+                id_menu_order INT NOT NULL,
                 id_table INT,
                 id_count_ks INT,
                 date_pay DATE NOT NULL,
                 id_employee INT,
                 pay_method VARCHAR(10),
                 sum_price INT NOT NULL CHECK (sum_price > 0),
+                is_closed TINYINT(1) NOT NULL,
                 CONSTRAINT chk_pay_method CHECK (pay_method IN ('karta', 'hotovost')),
                 FOREIGN KEY fk_table(id_table) REFERENCES din_table (id_table),
+                FOREIGN KEY fk_menu_order(id_menu_order) REFERENCES menu_orders (id_order),
                 FOREIGN KEY fk_quantity (id_count_ks) REFERENCES quantity (id_quantity),
                 FOREIGN KEY fk_employee (id_employee) REFERENCES employee (id)
 );

@@ -22,7 +22,7 @@
             echo "<div class='error_msg'>";
             echo validation_errors();
             echo "</div>";
-            echo form_open('http://restaurant-system.9e.cz/app/menu/new_menu');
+            echo form_open('http://localhost/app/menu/new_menu');
             echo form_label('Name : ');
             echo"<br/>";
             echo form_input('name');
@@ -40,14 +40,6 @@
             );
             echo form_input($data);
             echo "kč<br/>";
-            echo form_label('Weight: ');
-            echo "<br/>";
-             $data = array(
-                'type' => 'number',
-                'name' => 'weight'
-            );
-            echo form_input($data);
-            echo "g<br/>";
             echo form_label('Quantity: ');
             echo "<br/>";
              $data = array(
@@ -74,7 +66,7 @@
         <div id="all">
              <ol>
                 <?php foreach ($foods as $food): ?>
-                <li><a href="<?php echo "http://restaurant-system.9e.cz/app/menu/show_food/" . $food->name; ?>">
+                <li><a href="<?php echo "http://localhost/app/menu/show_food/" . $food->name; ?>">
                 <div id='f_name'>
                     <?php echo $food->name; ?>
                 </div>
@@ -85,13 +77,11 @@
         <div id="detail">
                 <?php foreach($single_food as $food): ?>
                 <p>Edit Detail & Click Update Button</p>
-                <form method="post" action="<?php echo "http://restaurant-system.9e.cz/app/menu/update_menu_name"?>">
+                <form method="post" action="<?php echo "http://localhost/app/menu/update_menu_name"?>">
                 <label>Name :</label>
                 <input type="text" name="food_name" value="<?php echo $food->name; ?>">
                 <label>Price :</label>
                 <input type="number" name="food_price" value="<?php echo $food->price; ?>">
-                <!--<label>Weight :</label>
-                <input type="number" name="food_weight" value="<?php //echo $food->weight; ?>">-->
                 <label>Quantity :</label>
                 <input type="number" name="food_quantity" value="<?php echo $food->quantity; ?>">
                 <label>Ingredience :</label>
@@ -101,6 +91,6 @@
                 </form>
                 <?php endforeach; ?>
         </div>
-        <b><a href="http://restaurant-system.9e.cz/app/login">Back</a></b>
+        <b><a href="http://localhost/app/login">Back</a></b>
     </body>
 </html>
