@@ -49,10 +49,10 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-//$db['default']['username'] = 'restaurantsystem'; //web
-$db['default']['username'] = 'root';
-//$db['default']['password'] = 'root'; //web
-$db['default']['password'] = '';
+$db['default']['username'] = 'restaurantsystem'; //web
+//$db['default']['username'] = 'root';
+$db['default']['password'] = 'root'; //web
+//$db['default']['password'] = '';
 $db['default']['database'] = 'iisdb';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
