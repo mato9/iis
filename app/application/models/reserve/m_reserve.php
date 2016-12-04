@@ -5,10 +5,7 @@
          * @return mixed
          */
 		public function display_rooms() {
-            $this->db->select('*');
-            $this->db->from('room');
-
-            $query = $this->db->get();
+            $query = $this->db->query('SELECT * FROM room WHERE id_room NOT IN (SELECT id_room FROM `rooms_reserve` WHERE DATE(date_reserve) = CURDATE());');
             return $query->result();
         }
         
@@ -17,10 +14,7 @@
          * @return mixed
          */
         public function display_tables() {
-            $this->db->select('*');
-            $this->db->from('din_table');
-
-            $query = $this->db->get();
+            $query = $this->db->query('SELECT * FROM din_table WHERE id_table NOT IN (SELECT id_din_table FROM `din_tables_reserve` WHERE DATE(date_reserve) = CURDATE());');
             return $query->result();
         }
 
@@ -41,11 +35,11 @@
         }
 
         /**
-         * Inserting a new reservation
+         * Inserting a new reservation of a table
          * @param $data
          * @return bool - query success
          */
-		public function insert_reservation($data) {
+		public function insert_table_reservation($data) {
             
             $this->db->insert('din_tables_reserve', $data);
 			if ($this->db->affected_rows() > 0) {
@@ -54,6 +48,21 @@
 				return false;
 			}
 		}
+
+        /**
+         * Inserting a new reservation of a whole room
+         * @param $data
+         * @return bool - query success
+         */
+        public function insert_room_reservation($data) {
+
+            $this->db->insert('rooms_reserve', $data);
+            if ($this->db->affected_rows() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 		
 	}
 ?>

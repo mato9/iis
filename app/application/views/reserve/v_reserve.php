@@ -11,11 +11,11 @@
                 <h1>Register table/room</h1><br/>
                     <div id="message"></div>
                     <hr>
-                        <?php echo form_open('http://localhost/app/reserve/try_reserve'); ?>
+                        <?php echo form_open('http://restaurant-system.9e.cz/app/reserve/try_reserve'); ?>
 
-                        <select>
+                        <select name="selectedRoom">
                             <?php foreach($rooms as $row) {
-                                echo '<option value="'.$row->title.'">'.$row->title.'</option>'; } ?>
+                                echo '<option value="'.$row->title."/".$row->id_room.'">'.$row->title.'</option>'; } ?>
                         </select>
 
                         <select name="selectedTables">
@@ -27,7 +27,7 @@
                         <br>
 
                         <?php
-                            echo form_label('Reservation date:');
+                            echo form_label('Datum rezervace:');
                             $date = array(
                             'type' => 'text',
                             'id' => 'reserve_date',
@@ -41,11 +41,12 @@
 
                         <br>
                         <br>
+                        <input id="reserveRoom" type="submit" name="reserve" value="Rezervovat celou místnost">
+                        <input id="reserve" type="submit" name="reserve" value="Rezervovat pouze stůl">
 
-                        <?php echo form_submit(array('id' => 'reserve', 'value' => 'Reserve')); ?>
                         <?php echo form_close(); ?>
 
-                        <b><a href="http://localhost/app/login/user_login_process">Back to admin page</a></b>
+                        <b><a href="http://restaurant-system.9e.cz/app/login/user_login_process">Back to admin page</a></b>
             </div>
         </div>
     </body>

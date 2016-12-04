@@ -51,16 +51,33 @@
                     'id_employee' => $result[0]->id
                 );
 
-                $inserting_res = $this->m_reserve->insert_reservation($data);
+                $inserting_res = '';
+                // reserving whole room
+                if ($this->input->post('reserve') == 'Rezervovat celou místnost') {
+                    $selected_room_id = explode("/", $this->input->post('selectedRoom'));
+                    $info = array(
+                        'id_reserve' => 'NULL', // AUTO-INCREMENT
+                        'id_room' => $selected_room_id[1],
+                        'date_reserve' => date('Y-m-d', strtotime($this->input->post('reserve_date'))),
+                        'id_employee' => $result[0]->id
+                    );
+                    $inserting_res = $this->m_reserve->insert_room_reservation($info);
+                    $this->dropdown();
+                // reserving only a table
+                } else {
+                    $inserting_res = $this->m_reserve->insert_table_reservation($data);
+                    $this->dropdown();
 
+                }
+                
                 if ($inserting_res) {
                     echo "<script type='text/javascript'>
-                        alert('Successfully reserved');
+                        alert('Úspěšne jste to zarezervoval.');
                     </script>";
                     $this->dropdown();
                 } else {
                     echo "<script type='text/javascript'>
-                        alert('Error occured while reserving');
+                        alert('Bohužel v systému se vyskytla chýba.');
                     </script>";
                     $this->dropdown();
                 }
