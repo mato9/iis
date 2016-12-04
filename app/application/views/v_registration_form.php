@@ -1,85 +1,191 @@
 <html>
 <?php
 if (isset($this->session->userdata['logged_in'])) {
-    header("location: http://restaurant-system.9e.cz/app/login/user_login_process");
+    header("location: http://localhost/sas/app/login/user_login_process");
 }
 ?>
 <head>
-    <title>Registration Form</title>
-    <link rel="stylesheet" type="text/css" href="../../../css/style.css">
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Open+Sans+Condensed:300|Raleway' rel='stylesheet' type='text/css'>
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Resis - registrace</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../css/style.css" rel="stylesheet">
 </head>
 <body>
-<div id="main">
-    <div id="login">
-        <h2>Registration Form</h2>
-        <hr/>
+ <div id="cont_bg" class="container col-sm-8 center_container">
+    <img class="img-responsive center" src="http://i.imgur.com/IgN4N96.png" width="120px" height="120px">
         <?php
         echo "<div class='error_msg'>";
         echo validation_errors();
         echo "</div>";
-        echo form_open('http://restaurant-system.9e.cz/app/login/new_user_registration');
-
-        echo form_label('Create Login : ');
-        echo"<br/>";
-        echo form_input('login');
+        $data = array(
+            'class' => 'form-horizontal'
+        );
+        echo form_open('http://localhost/sas/app/login/new_user_registration', $data);
+        echo '<h2 class="signup_label">Registration Form</h2>';
+        echo "<div class='form-group brd_topxs'>";
+        $data = array(
+            'type' => 'text',
+            'class' => 'control-label col-sm-2'
+        );
+        echo form_label('Create Login: ', 'createLogin', $data);
+        echo"<div class='col-sm-10'>";
+        $data = array(
+            'type' => 'text',
+            'class' => 'form-control form_bg',
+            'name' => 'login',
+            'placeholder' => "login",
+            'required' => ''
+        );
+        echo form_input($data);
         echo "<div class='error_msg'>";
         if (isset($message_display)) {
             echo $message_display;
         }
         echo "</div>";
-        echo"<br/>";
-        echo form_label('Email : ');
-        echo"<br/>";
+        echo "</div>";
+        echo "</div>";
+
+        echo '<div class="form-group ">';
+        $data = array(
+            'type' => 'text',
+            'class' => 'control-label col-sm-2'
+        );
+        echo form_label('Password : ','password', $data);
+        echo '<div class="col-sm-10">';
+        $data = array(
+            'type' => 'password',
+            'class' => 'form-control form_bg',
+            'name' => 'password',
+            'placeholder' => "********",
+            'required' => ''
+        );
+        echo form_password($data);
+        echo "</div>";
+        echo "</div>";
+
+        echo '<div class="form-group ">';
+        $data = array(
+            'type' => 'text',
+            'class' => 'control-label col-sm-2'
+        );
+        echo form_label('Email : ', 'email', $data);
+        echo '<div class="col-sm-10">';
         $data = array(
             'type' => 'email',
-            'name' => 'email'
+            'class' => 'form-control form_bg',
+            'name' => 'email',
+            'placeholder' => "email",
+            'required' => ''
         );
         echo form_input($data);
-        echo"<br/>";
-        echo"<br/>";
-        echo form_label('Password : ');
-        echo"<br/>";
-        echo form_password('password');
-        echo"<br/>";
-        echo"<br/>";
-        echo form_label('First name :');
-        echo form_input($data = array('id' => 'firstname', 'name' => 'firstname'));
-        echo"<br/>";
-        echo"<br/>";
-        echo form_label('Last name :');
-        echo form_input($data = array('id' => 'lastname', 'name' => 'lastname'));
-        echo"<br/>";
-        echo"<br/>";
-        echo form_label('Birthday :');
-        $date = array(
+        echo "</div>";
+        echo "</div>";
+
+        echo '<div class="form-group">';
+        $data = array(
             'type' => 'text',
+            'class' => 'control-label col-sm-2'
+        );
+        echo form_label('First name: ', 'firstname', $data);
+        echo '<div class="col-sm-10">';
+        echo form_input($data = array('id' => 'firstname', 'name' => 'firstname', 'class' =>"form-control form_bg", 'placeholder' => "firstname", 'required' => '' ));
+        echo "</div>";
+        echo "</div>";
+
+        echo '<div class="form-group">';
+        $data = array(
+            'type' => 'text',
+            'class' => 'control-label col-sm-2'
+        );
+        echo form_label('Last name :', 'lastname', $data);
+        echo '<div class="col-sm-10">';
+        echo form_input($data = array('id' => 'lastname', 'name' => 'lastname', 'class' =>"form-control form_bg", 'placeholder' => "lastname", 'required' => ''));
+        echo '</div>';
+        echo '</div>';
+
+        echo '<div class="form-group">';
+        $data = array(
+            'type' => 'text',
+            'class' => 'control-label col-sm-2'
+        );
+        echo form_label('Birthday :','birthday', $data);
+        $date = array(
+            'type' => 'date',
             'id' => 'birthdate',
             'name' => 'birthdate',
-            'class' => 'input_box',
+            'class' => 'form-control form_bg',
             'placeholder' => 'dd-mm-yyyy',
             'required' => ''
         );
+        echo '<div class="col-sm-10">';
         echo form_input($date);
-        echo"<br/>";
-        echo"<br/>";
-        echo form_label('Address :');
-        echo form_input($data = array('id' => 'address', 'name' => 'address'));
-        echo"<br/>";
-        echo"<br/>";
-        echo form_label('Phone :');
-        echo form_input($data = array('id' => 'phone', 'name' => 'phone'));
-        echo"<br/>";
-        echo"<br/>";
+        echo "</div>";
+        echo "</div>";
+
+        echo '<div class="form-group">';
+        $data = array(
+            'type' => 'text',
+            'class' => 'control-label col-sm-2'
+        );
+        echo form_label('Address :', 'address', $data);
+        echo '<div class="col-sm-10">';
+        echo form_input($data = array('id' => 'address', 'class' => "form-control form_bg",'name' => 'address', 'placeholder' => "address", 'required' => ''));
+        echo "</div>";
+        echo "</div>";
+        
+        echo '<div class="form-group">';
+        $data = array(
+            'type' => 'number',
+            'class' => 'control-label col-sm-2'
+        );
+        echo form_label('Phone :', 'telefon', $data);
+        echo '<div class="col-sm-10">';
+        echo form_input($data = array('id' => 'phone', 'name' => 'phone', 'class' => "form-control form_bg", 'placeholder' => "phone", 'required' => ''));
+        echo "</div>";
+        echo "</div>";
+        
         $date = array(
-            'type' => 'hidden',
+            'type' => 'text',
             'id' => 'owner',
             'name' => 'owner',
             'class' => 'hide',
-            'value' => 'weither'
+            'placeholder' => 'weither'
         );
         echo form_input($date);
-        echo form_submit('submit', 'Register');
+
+        $data = array(
+            'type' => 'submit',
+            'value' => 'Register',
+            'name' => 'submit',
+            'class' => 'btn btn-lg btn-primary btn-block brd_botxs'
+        );
+
+        echo form_submit($data);
+        echo '<div class="signup_foot">';
+        echo '<a href="http://localhost/sas/app/login/index" class="text_shadow">For Login Click Here</a>';
+        echo '</div>';
         echo form_close();
         ?>
         <?php
@@ -94,8 +200,10 @@ if (isset($this->session->userdata['logged_in'])) {
             echo "<label class='label_output'>Entered Date: </label>".$Birthday;
         }
         ?>
-        <a href="http://restaurant-system.9e.cz/app/login/index">For Login Click Here</a>
-    </div>
+        <!-- /container -->
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+        
 </div>
 </body>
 </html>
