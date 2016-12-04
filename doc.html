@@ -1,103 +1,228 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html>
+
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
     <title>Projekt IIS</title>
+
     <style type="text/css">
-    	table { border-collapse: collapse; }
-    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
-    	dt { font-weight: bold; margin-top: 0.5em; }
+        table {
+            border-collapse: collapse;
+        }
+        
+        td,
+        th {
+            border: 1px solid black;
+            padding: 0.3em 0.5em;
+            text-align: left;
+        }
+        
+        dt {
+            font-weight: bold;
+            margin-top: 0.5em;
+        }
     </style>
+
 </head>
+
 <body>
 
-<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+
+
+    <!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+
      podle použitého editoru -->
 
-<h1>Restaurační systém</h1> <!-- Nahradte názvem svého zadání -->
 
-<dl>
-	<dt>Autoři</dt>
-	<dd>Sultan Zhantemirov <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
-	    <a href="mailto:xzhant00@stud.fit.vutbr.cz">xzhant00@stud.fit.vutbr.cz</a> -
-		databázový subsystém, rezervace místností/stolů, přihlašování uživatelů, zadávání a správa objednávek, zadávání tržeb, dokumentace.
-	</dd>
-	<dd>Martin Auxt <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
-	    <a href="mailto:xauxtm00@stud.fit.vutbr.cz">xauxtm00@stud.fit.vutbr.cz</a> - 
-		správa a registrace uživatelů, správa jídelních listků, validace vstupů, výpis tržeb.
-	</dd>
-	<dd>Lukáš Lešo <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
-	    <a href="mailto:xauxtm00@stud.fit.vutbr.cz">xlesol00@stud.fit.vutbr.cz</a> - 
-		design systému.
-	</dd>
-	<dt>URL aplikace</dt>
-	<dd><a href="http://restaurant-system.9e.cz/">http://restaurant-system.9e.cz/</a></dd>
-	
-</dl>
 
-<h2>Uživatelé systému pro testování</h2>
-<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
-<table>
-<tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
-<tr><td>xzhant00</td><td>heslo1</td><td>Administrátor</td></tr>
-<tr><td>manager</td><td>manager</td><td>Vedoucí</td></tr>
-<tr><td>waiter</td><td>waiter</td><td>Číšník</td></tr>
-</table>
+    <h1>Restaurační systém</h1>
+    <!-- Nahradte názvem svého zadání -->
 
-<h2>Implementace</h2>
-<table>
-  <tbody>
-  <tr>
-  	<td><b>Soubor(y)</b></td>
-  	<td><b>Popis</b></td>
-  </tr>
-  <tr>
-    <td>controllers/login.php<br>models/m_login.php<br>views/v_login_form.php</td>
-    <td>Registrace uživatelů.<br></td>
-  </tr>
-  <tr>
-    <td>controllers/menu.php<br>models/menu/m_menu.php<br>views/menu/v_menu.php</td>
-    <td>Zobrazení a správa jídelních listků.<br></td>
-  </tr>
-  <tr>
-    <td>controllers/order.php<br>models/order/m_order.php<br>views/order/v_closed_order_to_print.php<br>views/model/order/v_order.php</td>
-    <td>Přidání a odebrání objednávek pití/jídla.<br></td>
-  </tr>
-  <tr>
-    <td>controllers/orders_overview.php<br>models/orders_overview/m_orders_overview.php<br>views/model/orders_overview/v_orders_overview.php<br>views/model/orders_overview/v_orders_overview_close_to_print.php</td>
-    <td>Zobrazení informací o aktuálních neuzavřených objednávkách pití/jídla.<br></td>
-  </tr>
-  <tr>
-    <td>controllers/record.php<br>models/orders_overview/m_record.php<br>views/model/orders_overview/record.php</td>
-    <td>Zobrazení informací tržeb.<br></td>
-  </tr>
-  <tr>
-    <td>controllers/reserve.php<br>models/reserve/m_reserve.php<br>views/model/reserve/v_reserve.php</td>
-    <td>Rezervace místností/stolů.<br></td>
-  </tr>
-  <tr>
-    <td>controllers/update.php<br>models/m_update.php<br>views/v_update</td>
-    <td>Změna údajů uživatelů.<br></td>
-  </tr>
-  <tr>
-    <td>controllers/login.php<br>models/m_login.php<br>views/admin_page.php</td>
-    <td>Ovladací panel uživatele.<br></td>
-  </tr>
-  
-</tbody></table>
 
-<h2>Instalace</h2>
-<ul>
-<li>Instalace probíha překopírovaním souborů na server do cílové složky a změnou souboru <em>app/application/config/database.php</em> na správné hodnoty pro připojení k databázi.</li>
-<li>Stránky používají framework CodeIgniter a základní konfigurace je postačující - PHP 5.4 a MySQL 5.6.</li>
-<li>Databáze se inicializuje skriptem <em>create_tables_script.sql</em>.</li>
-</ul>
 
-<h2>Známé problémy</h2>
-<p></p>
-<p></p>
-<p></p>
+    <dl>
+
+        <dt>Autoři</dt>
+
+        <dd>Sultan Zhantemirov
+            <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+
+            <a href="mailto:xzhant00@stud.fit.vutbr.cz">xzhant00@stud.fit.vutbr.cz</a> - databázový subsystém, rezervace místností/stolů, přihlašování uživatelů, zadávání a správa objednávek, zadávání tržeb, dokumentace.
+
+        </dd>
+
+        <dd>Martin Auxt
+            <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+
+            <a href="mailto:xauxtm00@stud.fit.vutbr.cz">xauxtm00@stud.fit.vutbr.cz</a> - správa a registrace uživatelů, správa jídelních listků, validace vstupů, výpis tržeb.
+
+        </dd>
+
+        <dd>Lukáš Lešo
+            <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+
+            <a href="mailto:xauxtm00@stud.fit.vutbr.cz">xlesol00@stud.fit.vutbr.cz</a> - design systému.
+
+        </dd>
+
+        <dt>URL aplikace</dt>
+
+        <dd><a href="http://restaurant-system.9e.cz/">http://restaurant-system.9e.cz/</a></dd>
+
+
+
+    </dl>
+
+
+
+    <h2>Uživatelé systému pro testování</h2>
+
+    <p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+
+    <table>
+
+        <tr>
+            <th>Login</th>
+            <th>Heslo</th>
+            <th>Role</th>
+        </tr>
+
+        <tr>
+            <td>xzhant00</td>
+            <td>heslo1</td>
+            <td>Administrátor</td>
+        </tr>
+
+        <tr>
+            <td>manager</td>
+            <td>manager</td>
+            <td>Vedoucí</td>
+        </tr>
+
+        <tr>
+            <td>waiter</td>
+            <td>waiter</td>
+            <td>Číšník</td>
+        </tr>
+
+    </table>
+
+
+
+    <h2>Implementace</h2>
+
+    <table>
+
+        <tbody>
+
+            <tr>
+
+                <td><b>Soubor(y)</b></td>
+
+                <td><b>Popis</b></td>
+
+            </tr>
+
+            <tr>
+
+                <td>controllers/login.php<br>models/m_login.php<br>views/v_login_form.php</td>
+
+                <td>Registrace uživatelů.<br></td>
+
+            </tr>
+
+            <tr>
+
+                <td>controllers/menu.php<br>models/menu/m_menu.php<br>views/menu/v_menu.php</td>
+
+                <td>Zobrazení a správa jídelních listků.<br></td>
+
+            </tr>
+
+            <tr>
+
+                <td>controllers/order.php<br>models/order/m_order.php<br>views/order/v_closed_order_to_print.php<br>views/model/order/v_order.php</td>
+
+                <td>Přidání a odebrání objednávek pití/jídla.<br></td>
+
+            </tr>
+
+            <tr>
+
+                <td>controllers/orders_overview.php<br>models/orders_overview/m_orders_overview.php<br>views/model/orders_overview/v_orders_overview.php<br>views/model/orders_overview/v_orders_overview_close_to_print.php</td>
+
+                <td>Zobrazení informací o aktuálních neuzavřených objednávkách pití/jídla.<br></td>
+
+            </tr>
+
+            <tr>
+
+                <td>controllers/record.php<br>models/orders_overview/m_record.php<br>views/model/orders_overview/record.php</td>
+
+                <td>Zobrazení informací tržeb.<br></td>
+
+            </tr>
+
+            <tr>
+
+                <td>controllers/reserve.php<br>models/reserve/m_reserve.php<br>views/model/reserve/v_reserve.php</td>
+
+                <td>Rezervace místností/stolů.<br></td>
+
+            </tr>
+
+            <tr>
+
+                <td>controllers/update.php<br>models/m_update.php<br>views/v_update</td>
+
+                <td>Změna údajů uživatelů.<br></td>
+
+            </tr>
+
+            <tr>
+
+                <td>controllers/login.php<br>models/m_login.php<br>views/admin_page.php</td>
+
+                <td>Ovladací panel uživatele.<br></td>
+
+            </tr>
+
+
+
+        </tbody>
+    </table>
+
+
+
+    <h2>Instalace</h2>
+
+    <ul>
+
+        <li>Instalace probíha překopírovaním souborů na server do cílové složky a změnou souboru <em>app/application/config/database.php</em> na správné hodnoty pro připojení k databázi.</li>
+
+        <li>Stránky používají framework CodeIgniter a základní konfigurace je postačující - PHP 5.4 a MySQL 5.6.</li>
+
+        <li>Databáze se inicializuje skriptem <em>create_tables_script.sql</em>.</li>
+
+    </ul>
+
+
+
+    <h2>Známé problémy</h2>
+
+    <p>Registrace uživatel nedavají velký smysl, pretože registrovať by mal vedeť len majitel reštaurace.</p>
+
+    <p></p>
+
+    <p></p>
+
+
 
 </body>
+
 </html>
