@@ -5,6 +5,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo "../css/update.css" ?>">
     </head>
     <body>
+    <?php
+        $owner = owner
         <div id="container">
         <div id="wrapper">
             <h1>Update Data In Database Using CodeIgniter </h1><hr/>
@@ -13,7 +15,7 @@
                 <!-- Fetching Names Of All Employee From Database -->
                 <ol>
                     <?php foreach ($employee as $employ): ?>
-                    <li><a href="<?php echo "http://localhost/app/update/show_employee_id/" . $employ->login; ?>"><?php echo $employ->firstname." "; echo $employ->lastname; ?></a></li>
+                    <li><a href="<?php echo "http://localhost/sas/app/update/show_employee_id/" . $employ->login; ?>"><?php echo $employ->firstname." "; echo $employ->lastname; ?></a></li>
                     <?php endforeach; ?>
                 </ol>
             </div>
@@ -21,7 +23,7 @@
                 <!-- Fetching All Details of Selected Employee From Database And Showing In a Form -->
                 <?php foreach ($single_login as $employ): ?>
                     <p>Edit Detail & Click Update Button</p>
-                    <form method="post" action="<?php echo "http://localhost/app/update/update_employee_id1"?>">
+                    <form method="post" action="<?php echo "http://localhost/sas/app/update/update_employee_id1"?>">
                         <label id="hide">Login :</label>
                         <input type="text" id="hide" name="login" value="<?php echo $employ->login; ?>">
                         <label>Name :</label>
@@ -46,7 +48,7 @@
                 <?php endforeach; ?>
             </div>
         </div>
-        <b><a href="http://localhost/app/login">Back</a></b>
+        <b><a href="http://localhost/sas/app/login">Back</a></b>
         </div>
     </body>
 </html>
