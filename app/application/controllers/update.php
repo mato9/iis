@@ -6,43 +6,52 @@
         }
 
         public function index() {
-           // $this->load->view("v_update");
             $this->show_employee_id();
         }
 
         function show_employee_id() {
             $id = $this->uri->segment(3);
-            $data['employee'] = $this->m_update->show_employee();
-            $data['single_login'] = $this->m_update->show_employee_id($id);
+            $owner = ($this->session->userdata['logged_in']['owner']);
             
-            $this->get_owner();
-            $this->load->view('v_update', $data);
-        }
 
-        function get_owner()
-        {
-            $data['owner'] = $this->m_update->get_owner();
-            print_r($data['owner']);
+            $data['employee'] = $this->m_update->show_employee();
+            if($owner == 'owner')
+                $data['single_login'] = $this->m_update->show_employee_id($id);
+            else {
+                $id = ($this->session->userdata['logged_in']['login']);
+                $data['single_login'] = $this->m_update->show_employee_id($id);
+            }
+            $this->load->view('v_update', $data);
         }
 
         function update_employee_id1() {
             $id = $this->input->post('login');
             if($this->input->post('update')){
-                $data = array(
-                        'firstname' => $this->input->post('firstname'),
-                        'lastname' => $this->input->post('lastname'),
-                        'email' => $this->input->post('email'),
-                        'birthdate' => date('Y-m-d', strtotime($this->input->post('birthdate'))),
-                        'contract_from_date' => $this->input->post('contract_from_date'),
-                        'contract_to_date' => $this->input->post('contract_to_date'),
-                        'address' => $this->input->post('address'),
-                        'phone' => $this->input->post('phone')
-                );
+                if(($this->session->userdata['logged_in']['login']) == 'owner')
+                    $data = array(
+                            'firstname' => $this->input->post('firstname'),
+                            'lastname' => $this->input->post('lastname'),
+                            'email' => $this->input->post('email'),
+                            'birthdate' => date('Y-m-d', strtotime($this->input->post('birthdate'))),
+                            'contract_from_date' => $this->input->post('contract_from_date'),
+                            'contract_to_date' => $this->input->post('contract_to_date'),
+                            'address' => $this->input->post('address'),
+                            'phone' => $this->input->post('phone')
+                    );
+                else {
+                    $data = array(
+                            'firstname' => $this->input->post('firstname'),
+                            'lastname' => $this->input->post('lastname'),
+                            'email' => $this->input->post('email'),
+                            'birthdate' => date('Y-m-d', strtotime($this->input->post('birthdate'))),
+                            'address' => $this->input->post('address'),
+                            'phone' => $this->input->post('phone')
+                    );
+                }
                 $result = $this->m_update->update_employee_id1($id,$data);
                 if($result)
                 {
                     $data['message_display'] = 'Update Successfully !';
-                    //$this->load->view('v_login_form', $data);
                 }
                 else {
                     $data['message_display'] = 'Update error!';
@@ -57,7 +66,6 @@
                     echo "<script type='text/javascript'>
                     alert('Delete employee successfully');
                     </script>";
-                    //$this->load->view('v_login_form', $data);
                 }
                 else {
                     $data['message_display'] = 'Delete error!';
